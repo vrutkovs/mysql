@@ -1,0 +1,26 @@
+machine:
+  services:
+    - docker
+  python:
+    version: 2.7
+
+dependencies:
+  pre:
+   # Clone latest from git since we don't have a pip package yet
+    - pip install -U https://github.com/Containers-Testing-Framework/ctf-cli/archive/master.zip
+  override:
+    - docker info
+    - cd 5.5 && docker build -t test_mysql_centos7 .
+   # Throws 'There are no enabled repos' on CircleCI
+   # - cd 5.5 && mv Dockerfile.rhel7 Dockerfile && docker build -t test_mysql_rhel7 .
+
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
+    - rm -rf .git  # Don't let CircleCI cache submodules
+
+test:
+  override:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - ctf-cli run -d IMAGE=test_mysql_centos7
