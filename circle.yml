@@ -23,4 +23,4 @@ checkout:
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-    - ctf-cli run -d IMAGE=test_mysql_centos7
+    - ctf-cli -v run -d IMAGE=test_mysql_centos7
