@@ -7,7 +7,7 @@ machine:
 dependencies:
   pre:
    # Clone latest from git since we don't have a pip package yet
-    - pip install -U https://github.com/Containers-Testing-Framework/ctf-cli/archive/master.zip
+    - pip install -U https://github.com/vrutkovs/ctf-cli/archive/new_environment.zip
   override:
     - docker info
     - cd 5.5 && docker build -t test_mysql_centos7 .
