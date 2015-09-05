@@ -1,0 +1,13 @@
+sudo: required
+
+language: python
+
+services:
+  - docker
+
+before_install:
+- pip install -U https://github.com/Container-Testing-Framework/ctf-cli/archive/master.zip
+- cd 5.5 && docker build -t test_mysql_centos7 .
+
+script:
+- ctf-cli -v run -d IMAGE=test_mysql_centos7
