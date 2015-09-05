@@ -6,7 +6,7 @@ services:
   - docker
 
 before_install:
-- pip install -U https://github.com/Container-Testing-Framework/ctf-cli/archive/master.zip
+- pip install -U https://github.com/Containers-Testing-Framework/ctf-cli/archive/master.zip
 - cd 5.5 && docker build -t test_mysql_centos7 .
 
 script:
